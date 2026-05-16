@@ -1,32 +1,48 @@
 import User from "../models/User.js";
 import bcrypt from "bcryptjs";
-import jwt from "jsonwebtoken";
+import { generateToken } from "../config/jwt.js";
 
 export const register = async (req, res) => {
-  const { name, email, password } = req.body;
+  try {
+    const { name, email, password } = req.body;
 
-  const hashed = await bcrypt.hash(password, 10);
+    if (!name || !email || !password)
+      return res.status(400).json({ message: "All fields are required" });
 
-  const user = await User.create({
-    name,
-    email,
-    password: hashed
-  });
+    const existing = await User.findOne({ email });
+    if (existing)
+      return res.status(400).json({ message: "Email already registered" });
 
-  res.json(user);
+    const hashed = await bcrypt.hash(password, 10);
+    const user = await User.create({ name, email, password: hashed });
+    const token = generateToken(user._id);
+
+    res.status(201).json({ token, user });
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
 };
 
 export const login = async (req, res) => {
-  const { email, password } = req.body;
+  try {
+    const { email, password } = req.body;
 
-  const user = await User.findOne({ email });
+    if (!email || !password)
+      return res.status(400).json({ message: "Email and password are required" });
 
-  if (!user) return res.status(404).json("User not found");
+    const user = await User.findOne({ email });
+    if (!user) return res.status(404).json({ message: "User not found" });
 
-  const isMatch = await bcrypt.compare(password, user.password);
-  if (!isMatch) return res.status(400).json("Invalid credentials");
+    const isMatch = await bcrypt.compare(password, user.password);
+    if (!isMatch) return res.status(400).json({ message: "Invalid credentials" });
 
-  const token = jwt.sign({ id: user._id }, "secret");
+    const token = generateToken(user._id);
+    res.json({ token, user });
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+};
 
-  res.json({ token, user });
+export const getMe = async (req, res) => {
+  res.json(req.user);
 };
