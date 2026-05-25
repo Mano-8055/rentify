@@ -1,248 +1,600 @@
-# 🏠 Rentify — Peer-to-Peer Rental Marketplace
+# 🏠 Rentify
 
-A full-stack rental platform where users can rent products from nearby neighbors within a 10km radius, with a trust-score system to ensure safe transactions.
+### Peer-to-Peer Rental Marketplace with Trust-Based Verification
+
+![React](https://img.shields.io/badge/React-19-61DAFB?style=for-the-badge&logo=react&logoColor=white)
+![Node.js](https://img.shields.io/badge/Node.js-Express-339933?style=for-the-badge&logo=node.js&logoColor=white)
+![MongoDB](https://img.shields.io/badge/MongoDB-Atlas-47A248?style=for-the-badge&logo=mongodb&logoColor=white)
+![TailwindCSS](https://img.shields.io/badge/TailwindCSS-3.4-06B6D4?style=for-the-badge&logo=tailwindcss&logoColor=white)
+![JWT](https://img.shields.io/badge/Auth-JWT-000000?style=for-the-badge&logo=jsonwebtokens&logoColor=white)
+![License](https://img.shields.io/badge/License-MIT-yellow?style=for-the-badge)
+
+Rentify is a full-stack peer-to-peer rental marketplace that enables users to rent products from nearby people within a configurable radius while maintaining trust and safety through identity verification and a dynamic trust-score system.
+
+The platform allows users to list products for rent, discover nearby rental items, manage rental requests, track rental history, and evaluate user reliability using a likelihood score mechanism.
 
 ---
 
-## 🚀 Features
+# 🌟 Key Features
 
 | Feature | Description |
-|---|---|
-| **Authentication** | JWT-based register/login with persistent sessions |
-| **Nearby Products** | Geolocation-powered search within configurable radius (default 10km) |
-| **Trust Score** | Automatic scoring system (0–100) updated after each rental |
-| **Product Listings** | Add items with images, hourly & daily pricing, categories |
-| **Rental Workflow** | Request → Accept/Reject → Return → Complete lifecycle |
-| **Government ID** | Upload ID for account verification badge |
-| **Dashboard** | Manage incoming requests, active rentals, and listings |
-| **Profile** | View trust score, stats, edit name, change avatar |
-| **Rent History** | Full transaction history as both renter and owner |
+|----------|-------------|
+| 🔐 Authentication | Secure JWT-based Register/Login system |
+| 📍 Nearby Rentals | Discover products within 10km radius |
+| ⭐ Trust Score | Dynamic user reliability scoring system |
+| 🏷 Product Listings | Upload products with hourly & daily pricing |
+| 🖼 Image Upload | Product image management |
+| 🆔 Government ID Verification | Verify users using official identification |
+| 📊 Dashboard | Manage products, requests, and rentals |
+| 📜 Rental History | Track all rental transactions |
+| 📱 Responsive UI | Mobile-first responsive design |
+| 🌙 Modern Theme | Dark UI with Tailwind CSS |
+| 🛡 Secure Backend | Protected APIs with JWT middleware |
+| 🚀 Cloud Deployment | MongoDB Atlas + Render + Vercel |
 
 ---
 
-## 🛠 Tech Stack
+# 📸 Application Preview
 
-### Frontend
-- React 19 + Vite
-- Tailwind CSS (dark glassmorphism theme)
-- React Router DOM v7
-- Axios (with auto auth interceptors)
-- Context API (AuthContext + UserContext)
+## Home Page
 
-### Backend
-- Node.js + Express.js (ES Modules)
-- MongoDB Atlas + Mongoose
-- JWT Authentication
-- Multer (local file uploads)
-- bcryptjs
+- Modern hero section
+- Featured categories
+- Trust score explanation
+- Nearby rental highlights
+
+## Nearby Products
+
+- Geolocation powered search
+- Product cards
+- Distance filtering
+- Category filters
+
+## Dashboard
+
+- Manage uploaded products
+- View rental requests
+- Track rental history
+- Monitor trust score
+
+## Profile
+
+- User information
+- Verification status
+- Trust badge
+- Rental statistics
 
 ---
 
-## 📁 Project Structure
+# 🏗 System Architecture
 
+```text
+┌────────────────────┐
+│   React Frontend   │
+└─────────┬──────────┘
+          │ Axios Requests
+          ▼
+┌────────────────────┐
+│ Express REST APIs  │
+└─────────┬──────────┘
+          │
+          ▼
+┌────────────────────┐
+│ JWT Authentication │
+└─────────┬──────────┘
+          │
+          ▼
+┌────────────────────┐
+│ MongoDB Atlas DB   │
+└────────────────────┘
 ```
+
+---
+
+# 🛠 Technology Stack
+
+## Frontend
+
+- React 19
+- Vite
+- Tailwind CSS
+- React Router DOM
+- Axios
+- Context API
+- Browser Geolocation API
+
+## Backend
+
+- Node.js
+- Express.js
+- MongoDB Atlas
+- Mongoose
+- JWT Authentication
+- bcryptjs
+- Multer
+- CORS
+
+## Database
+
+- MongoDB Atlas (Cloud Database)
+
+## Deployment
+
+- Frontend → Vercel
+- Backend → Render
+- Database → MongoDB Atlas
+
+---
+
+# 📁 Project Structure
+
+```text
 rentify/
+│
 ├── frontend/
+│   ├── public/
 │   └── src/
-│       ├── components/   # Navbar, Footer, ProductCard, Loader, ProtectedRoute
-│       ├── pages/        # Home, Login, Register, NearbyProducts, AddProduct,
-│       │                 # ProductDetails, Profile, Dashboard, RentHistory
-│       ├── context/      # AuthContext, UserContext
-│       ├── services/     # api.js, authService, productService, rentalService
-│       ├── hooks/        # useLocation
-│       └── utils/        # calculateDistance
+│       ├── assets/
+│       │   ├── images/
+│       │   └── icons/
+│       │
+│       ├── components/
+│       │   ├── Navbar.jsx
+│       │   ├── Footer.jsx
+│       │   ├── ProductCard.jsx
+│       │   ├── ProtectedRoute.jsx
+│       │   └── Loader.jsx
+│       │
+│       ├── pages/
+│       │   ├── Home.jsx
+│       │   ├── Login.jsx
+│       │   ├── Register.jsx
+│       │   ├── Dashboard.jsx
+│       │   ├── AddProduct.jsx
+│       │   ├── ProductDetails.jsx
+│       │   ├── NearbyProducts.jsx
+│       │   ├── RentHistory.jsx
+│       │   └── Profile.jsx
+│       │
+│       ├── context/
+│       │   ├── AuthContext.jsx
+│       │   └── UserContext.jsx
+│       │
+│       ├── services/
+│       │   ├── api.js
+│       │   ├── authService.js
+│       │   ├── productService.js
+│       │   └── rentalService.js
+│       │
+│       ├── hooks/
+│       │   └── useLocation.js
+│       │
+│       ├── utils/
+│       │   └── calculateDistance.js
+│       │
+│       ├── App.jsx
+│       ├── main.jsx
+│       └── index.css
 │
 └── backend/
-    └── src/
-        ├── config/       # db.js, jwt.js
-        ├── models/       # User, Product, Rental
-        ├── controllers/  # auth, product, rental, user
-        ├── routes/       # auth, product, rental, user
-        ├── middlewares/  # authMiddleware, uploadMiddleware
-        └── utils/        # calculateTrustScore, geoLocation
+    ├── src/
+    │   ├── config/
+    │   │   ├── db.js
+    │   │   └── jwt.js
+    │   │
+    │   ├── models/
+    │   │   ├── User.js
+    │   │   ├── Product.js
+    │   │   └── Rental.js
+    │   │
+    │   ├── controllers/
+    │   │   ├── authController.js
+    │   │   ├── productController.js
+    │   │   ├── rentalController.js
+    │   │   └── userController.js
+    │   │
+    │   ├── routes/
+    │   │   ├── authRoutes.js
+    │   │   ├── productRoutes.js
+    │   │   ├── rentalRoutes.js
+    │   │   └── userRoutes.js
+    │   │
+    │   ├── middlewares/
+    │   │   ├── authMiddleware.js
+    │   │   ├── uploadMiddleware.js
+    │   │   └── errorMiddleware.js
+    │   │
+    │   ├── utils/
+    │   │   ├── calculateTrustScore.js
+    │   │   └── geoLocation.js
+    │   │
+    │   ├── app.js
+    │   └── server.js
+    │
+    ├── .env
+    ├── package.json
+    └── README.md
 ```
 
 ---
 
-## ⚙️ Setup & Installation
+# 🗄 Database Design
 
-### Prerequisites
-- Node.js 18+
-- MongoDB Atlas account
+## User Schema
+
+| Field | Type |
+|---------|---------|
+| name | String |
+| email | String |
+| password | String |
+| governmentId | String |
+| likelihoodPoints | Number |
+| profileImage | String |
+| location | Object |
+| rentalHistory | Array |
+
+---
+
+## Product Schema
+
+| Field | Type |
+|---------|---------|
+| name | String |
+| description | String |
+| category | String |
+| images | Array |
+| priceHour | Number |
+| priceDay | Number |
+| owner | ObjectId |
+| location | Object |
+| availability | Boolean |
+
+---
+
+## Rental Schema
+
+| Field | Type |
+|---------|---------|
+| renter | ObjectId |
+| owner | ObjectId |
+| product | ObjectId |
+| startDate | Date |
+| endDate | Date |
+| rentalType | String |
+| totalAmount | Number |
+| status | String |
+
+---
+
+# ⚙️ Installation & Setup
+
+## Prerequisites
+
+- Node.js v18+
 - Git
+- MongoDB Atlas Account
 
-### 1. Clone and Install
+---
+
+## Clone Repository
 
 ```bash
-git clone <your-repo-url>
+git clone https://github.com/yourusername/rentify.git
+
 cd rentify
-
-# Install backend dependencies
-cd backend && npm install
-
-# Install frontend dependencies
-cd ../frontend && npm install
 ```
 
-### 2. Configure Backend Environment
+---
 
-Edit `backend/.env`:
+## Install Backend Dependencies
+
+```bash
+cd backend
+
+npm install
+```
+
+---
+
+## Install Frontend Dependencies
+
+```bash
+cd ../frontend
+
+npm install
+```
+
+---
+
+# 🔐 Environment Variables
+
+Create:
+
+```text
+backend/.env
+```
+
+Add:
+
 ```env
-MONGO_URI=your_mongodb_atlas_connection_string
-JWT_SECRET=your_super_secret_key_here
-PORT=5001
+MONGO_URI=your_mongodb_connection_string
+JWT_SECRET=your_secret_key
+PORT=5000
 FRONTEND_URL=http://localhost:5173
 ```
 
-### 3. Run the Application
+---
+
+# ▶ Running the Application
+
+## Terminal 1 — Backend
 
 ```bash
-# Terminal 1 — Backend (from /backend)
-npm run dev
+cd backend
 
-# Terminal 2 — Frontend (from /frontend)
 npm run dev
 ```
 
-Frontend: `http://localhost:5173`  
-Backend API: `http://localhost:5001/api`
+Expected:
 
----
-
-## 📡 API Reference
-
-### Auth
-```
-POST   /api/auth/register     Register new user
-POST   /api/auth/login        Login, returns JWT token
-GET    /api/auth/me           Get current user (requires auth)
-```
-
-### Products
-```
-GET    /api/products           Get all available products
-GET    /api/products/nearby    Get products within radius (?lat=&lng=&radius=)
-GET    /api/products/mine      Get my listed products (auth)
-GET    /api/products/:id       Get product by ID
-POST   /api/products           Create product with images (auth, multipart)
-PUT    /api/products/:id       Update product (auth, owner only)
-DELETE /api/products/:id       Delete product (auth, owner only)
-```
-
-### Rentals
-```
-POST   /api/rentals            Request a rental (auth)
-GET    /api/rentals/my-rentals         My rentals as renter (auth)
-GET    /api/rentals/owner-requests     Requests on my items (auth)
-PUT    /api/rentals/:id/accept         Accept request (auth, owner)
-PUT    /api/rentals/:id/reject         Reject request (auth, owner)
-PUT    /api/rentals/:id/return         Mark as returned (auth, renter)
-PUT    /api/rentals/:id/complete       Confirm complete + update trust (auth, owner)
-```
-
-### Users
-```
-GET    /api/users/profile      Get my profile (auth)
-PUT    /api/users/profile      Update name/profile image (auth, multipart)
-PUT    /api/users/location     Update location coordinates (auth)
-POST   /api/users/govt-id      Upload government ID (auth, multipart)
-GET    /api/users/:id          Get public user profile
+```text
+MongoDB Connected
+Server running on port 5000
 ```
 
 ---
 
-## 🛡️ Trust Score System
+## Terminal 2 — Frontend
 
-| Event | Points Change |
-|---|---|
-| On-time return | +5 (max 100) |
-| Late return | −10 |
-| Item damaged | −20 |
-| Fraud detected | −50 |
-
-| Score Range | Rating | Badge |
-|---|---|---|
-| 90–100 | Excellent | 🏆 |
-| 70–89 | Good | ✅ |
-| 50–69 | Fair | ⚠️ |
-| 30–49 | Poor | 🔸 |
-| 0–29 | Risky | 🚨 |
-
----
-
-## 📦 Rental Lifecycle
-
-```
-PENDING → ACCEPTED → RETURNED → COMPLETED
-         ↓ REJECTED
-```
-
-1. **Renter** sends request → status: `pending`
-2. **Owner** accepts → status: `accepted`, product marked unavailable
-3. **Renter** marks returned → status: `returned`
-4. **Owner** confirms return type → status: `completed`, trust score updated, product available again
-
----
-
-## 🌐 Deployment
-
-### Frontend → Vercel
 ```bash
 cd frontend
+
+npm run dev
+```
+
+Expected:
+
+```text
+Local: http://localhost:5173
+```
+
+---
+
+# 📡 API Endpoints
+
+## Authentication
+
+```http
+POST /api/auth/register
+POST /api/auth/login
+GET  /api/auth/me
+```
+
+---
+
+## Products
+
+```http
+GET    /api/products
+GET    /api/products/nearby
+GET    /api/products/:id
+
+POST   /api/products
+PUT    /api/products/:id
+DELETE /api/products/:id
+```
+
+---
+
+## Rentals
+
+```http
+POST   /api/rentals
+GET    /api/rentals/my-rentals
+GET    /api/rentals/owner-requests
+
+PUT    /api/rentals/:id/accept
+PUT    /api/rentals/:id/reject
+PUT    /api/rentals/:id/return
+PUT    /api/rentals/:id/complete
+```
+
+---
+
+## Users
+
+```http
+GET  /api/users/profile
+PUT  /api/users/profile
+PUT  /api/users/location
+POST /api/users/govt-id
+```
+
+---
+
+# 🛡 Trust Score System
+
+Every user begins with:
+
+```text
+100 Trust Points
+```
+
+### Score Updates
+
+| Event | Points |
+|---------|---------|
+| On-Time Return | +5 |
+| Late Return | -10 |
+| Damaged Product | -20 |
+| Fraud Activity | -50 |
+
+---
+
+### User Rating Levels
+
+| Score | Rating |
+|---------|---------|
+| 90-100 | 🏆 Excellent |
+| 70-89 | ✅ Good |
+| 50-69 | ⚠ Fair |
+| 30-49 | 🔸 Poor |
+| 0-29 | 🚨 Risky |
+
+---
+
+# 📦 Rental Workflow
+
+```text
+PENDING
+   │
+   ▼
+ACCEPTED
+   │
+   ▼
+RETURNED
+   │
+   ▼
+COMPLETED
+
+OR
+
+PENDING
+   │
+   ▼
+REJECTED
+```
+
+---
+
+# 🔒 Security Features
+
+- JWT Authentication
+- Password Hashing (bcryptjs)
+- Protected API Routes
+- Government ID Verification
+- Trust-Based Reputation System
+- Authorization Middleware
+- Environment Variable Protection
+- MongoDB Atlas Cloud Security
+- CORS Protection
+
+---
+
+# ⚡ Performance Optimizations
+
+- React Lazy Loading
+- Route-Based Code Splitting
+- Axios Instance Reuse
+- Optimized API Requests
+- Tailwind Utility Optimization
+- Memoized Components
+- Geolocation Caching
+- Efficient MongoDB Queries
+
+---
+
+# 🚀 Future Enhancements
+
+- Stripe Payment Integration
+- Real-Time Chat System
+- Push Notifications
+- AI Fraud Detection
+- QR-Based Product Verification
+- Product Recommendation Engine
+- Multi-Language Support
+- React Native Mobile Application
+
+---
+
+# 🌐 Deployment
+
+## Frontend (Vercel)
+
+```bash
 npm run build
-# Deploy dist/ to Vercel
-# Set VITE_API_URL=https://your-render-backend.onrender.com/api
-# Set VITE_BACKEND_URL=https://your-render-backend.onrender.com
 ```
 
-### Backend → Render
-```
-Build command: npm install
-Start command: npm start
-Environment variables:
-  MONGO_URI=<atlas_uri>
-  JWT_SECRET=<secret>
-  PORT=10000
-  FRONTEND_URL=https://your-vercel-app.vercel.app
-```
+Set:
 
-> Note: For production image uploads, consider migrating from local Multer storage to Cloudinary.
+```env
+VITE_API_URL=https://your-backend.onrender.com/api
+```
 
 ---
 
-## 💡 Viva Explanation Points
+## Backend (Render)
 
-**Q: How does the 10km geolocation work?**  
-A: The browser's Geolocation API fetches lat/lng. The backend uses the Haversine formula to calculate the great-circle distance between two GPS coordinates, filtering products within the specified radius.
+Environment Variables:
 
-**Q: How is the trust score calculated?**  
-A: Each user starts with 100 points. When an owner completes a rental, they submit a returnType (onTime/late/damage/fraud). The `calculateTrustScore` utility adjusts the renter's points accordingly, bounded between 0–100.
+```env
+MONGO_URI=your_mongo_uri
+JWT_SECRET=your_secret
+PORT=10000
+FRONTEND_URL=https://your-vercel-app.vercel.app
+```
 
-**Q: How is authentication implemented?**  
-A: JWT tokens are generated on login/register and stored in localStorage. The Axios interceptor automatically attaches `Authorization: Bearer <token>` to every request. The `protect` middleware on the backend verifies the token and attaches the user to `req.user`.
+Build Command:
 
-**Q: How is file upload handled?**  
-A: Multer middleware processes `multipart/form-data` requests. Files are stored in `backend/uploads/` subdirectories. Express serves them statically at `/uploads/*`. Frontend constructs full URLs using `BACKEND_URL + filePath`.
+```text
+npm install
+```
 
-**Q: How does the rental workflow prevent conflicts?**  
-A: When an owner accepts a rental, `product.availability` is set to `false`, preventing other renters from booking it. On completion, availability is restored to `true`.
+Start Command:
 
-**Q: What is glassmorphism and how is it implemented?**  
-A: Glassmorphism is a design style using semi-transparent backgrounds with blur effects. In Tailwind, it's achieved with `backdrop-blur-xl` and `bg-white/5` (5% opacity white background) combined with subtle borders.
-
----
-
-## 📸 Key Pages
-
-- `/` — Hero landing page with 3D card effects, features, and trust score guide
-- `/register` & `/login` — Glassmorphism auth forms
-- `/nearby` — Geolocation-powered product grid with category/radius filters
-- `/products/:id` — Product details + rental booking form with price calculator
-- `/add-product` — Multi-image upload with category and pricing
-- `/dashboard` — Rental request management (accept/reject/complete)
-- `/profile` — Trust score ring, stats, listings, and rental history
-- `/rent-history` — Full rental transaction history
+```text
+npm start
+```
 
 ---
 
-Built with ❤️ using React · Node.js · MongoDB · Tailwind CSS
+# 🎯 Project Highlights
+
+- Built a full-stack MERN application
+- Implemented JWT Authentication
+- Developed geolocation-based product discovery
+- Designed a trust-score reputation system
+- Created protected routes and secure APIs
+- Integrated MongoDB Atlas cloud database
+- Built responsive UI using Tailwind CSS
+- Followed MVC architecture principles
+
+---
+
+# 💡 Viva Questions & Answers
+
+### How does geolocation work?
+
+The browser's Geolocation API fetches latitude and longitude coordinates. The backend calculates distance using the Haversine formula and returns products within a 10km radius.
+
+### How is authentication implemented?
+
+JWT tokens are generated after login and stored in localStorage. Protected backend routes verify tokens using middleware.
+
+### How does the trust score work?
+
+Users begin with 100 points. Rental completion updates the score depending on whether the item was returned on time, late, damaged, or involved fraud.
+
+### Why MongoDB Atlas?
+
+MongoDB Atlas provides a cloud-hosted, scalable NoSQL database that integrates easily with Node.js and supports secure deployments.
+
+### Why React + Tailwind?
+
+React provides reusable component-based architecture, while Tailwind CSS enables rapid UI development with utility-first styling.
+
+---
+
+# 👨‍💻 Author
+
+**Manoshankar**
+
+Integrated M.Tech Software Engineering  
+Vellore Institute of Technology (VIT)
+
+GitHub:
+https://github.com/Mano-8055
+
+---
+
+⭐ If you found this project useful, please consider giving it a star.
