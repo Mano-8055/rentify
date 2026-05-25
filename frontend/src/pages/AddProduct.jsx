@@ -19,16 +19,15 @@ export default function AddProduct() {
     priceHour: "",
     priceDay: "",
   });
-  const [images, setImages] = useState([]);
+  const [images, setImages]     = useState([]);
   const [previews, setPreviews] = useState([]);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState("");
+  const [loading, setLoading]   = useState(false);
+  const [error, setError]       = useState("");
 
-  const handleChange = (e) =>
-    setForm({ ...form, [e.target.name]: e.target.value });
+  const handleChange = (e) => setForm({ ...form, [e.target.name]: e.target.value });
 
   const handleImages = (e) => {
-    const files = Array.from(e.target.files);
+    const files = Array.from(e.target.files).slice(0, 5);
     setImages(files);
     setPreviews(files.map((f) => URL.createObjectURL(f)));
   };
@@ -57,7 +56,6 @@ export default function AddProduct() {
       formData.append("lat", lat);
       formData.append("lng", lng);
       images.forEach((img) => formData.append("images", img));
-
       await addProduct(formData);
       navigate("/dashboard");
     } catch (err) {
@@ -70,19 +68,19 @@ export default function AddProduct() {
   return (
     <div className="min-h-screen bg-[#0a0a0a] pt-20 pb-16 px-4">
       <div className="max-w-2xl mx-auto">
+
+        {/* Header */}
         <div className="mb-8">
           <h1 className="text-3xl font-bold text-white mb-2">
             List a <span className="gradient-text">Product</span>
           </h1>
-          <p className="text-slate-500 text-sm">
-            Share your idle items and start earning
-          </p>
+          <p className="text-slate-500 text-sm">Share your idle items and start earning</p>
         </div>
 
-        <div className="glass rounded-3xl p-8">
+        <div className="glass-elevated rounded-3xl p-8">
           {error && (
-            <div className="mb-5 px-4 py-3 rounded-xl bg-red-500/10 border border-red-500/20 text-red-400 text-sm">
-              {error}
+            <div className="mb-5 px-4 py-3 rounded-xl bg-red-500/10 border border-red-500/20 text-red-400 text-sm flex items-center gap-2">
+              <span>⚠️</span> {error}
             </div>
           )}
 
@@ -90,7 +88,7 @@ export default function AddProduct() {
             {/* Name */}
             <div>
               <label className="text-xs text-slate-400 font-medium mb-1.5 block">
-                Product Name *
+                Product Name <span className="text-red-400">*</span>
               </label>
               <input
                 name="name"
@@ -104,9 +102,7 @@ export default function AddProduct() {
 
             {/* Description */}
             <div>
-              <label className="text-xs text-slate-400 font-medium mb-1.5 block">
-                Description
-              </label>
+              <label className="text-xs text-slate-400 font-medium mb-1.5 block">Description</label>
               <textarea
                 name="description"
                 placeholder="Describe your item — condition, features, what's included…"
@@ -119,9 +115,7 @@ export default function AddProduct() {
 
             {/* Category */}
             <div>
-              <label className="text-xs text-slate-400 font-medium mb-1.5 block">
-                Category
-              </label>
+              <label className="text-xs text-slate-400 font-medium mb-1.5 block">Category</label>
               <select
                 name="category"
                 value={form.category}
@@ -129,9 +123,7 @@ export default function AddProduct() {
                 className="input-dark"
               >
                 {CATEGORIES.map((c) => (
-                  <option key={c} value={c} className="bg-[#111]">
-                    {c}
-                  </option>
+                  <option key={c} value={c} className="bg-[#111]">{c}</option>
                 ))}
               </select>
             </div>
@@ -140,7 +132,7 @@ export default function AddProduct() {
             <div className="grid grid-cols-2 gap-4">
               <div>
                 <label className="text-xs text-slate-400 font-medium mb-1.5 block">
-                  Price per Hour (₹) *
+                  Price per Hour (₹) <span className="text-red-400">*</span>
                 </label>
                 <input
                   name="priceHour"
@@ -156,7 +148,7 @@ export default function AddProduct() {
               </div>
               <div>
                 <label className="text-xs text-slate-400 font-medium mb-1.5 block">
-                  Price per Day (₹) *
+                  Price per Day (₹) <span className="text-red-400">*</span>
                 </label>
                 <input
                   name="priceDay"
@@ -175,11 +167,11 @@ export default function AddProduct() {
             {/* Images */}
             <div>
               <label className="text-xs text-slate-400 font-medium mb-1.5 block">
-                Product Images (up to 5)
+                Product Images <span className="text-slate-600">(up to 5)</span>
               </label>
-              <label className="flex flex-col items-center justify-center h-28 rounded-xl border-2 border-dashed border-white/10 hover:border-green-500/30 cursor-pointer transition-all hover:bg-green-500/3">
-                <span className="text-2xl mb-1">📸</span>
-                <span className="text-xs text-slate-500">
+              <label className="flex flex-col items-center justify-center h-28 rounded-xl border-2 border-dashed border-white/10 hover:border-green-500/30 cursor-pointer transition-all hover:bg-green-500/3 group">
+                <span className="text-2xl mb-1 group-hover:scale-110 transition-transform">📸</span>
+                <span className="text-xs text-slate-500 group-hover:text-slate-400 transition-colors">
                   Click to upload images
                 </span>
                 <input
@@ -196,7 +188,7 @@ export default function AddProduct() {
                     <img
                       key={i}
                       src={src}
-                      alt=""
+                      alt={`Preview ${i + 1}`}
                       className="w-16 h-16 rounded-lg object-cover border border-white/10"
                     />
                   ))}
@@ -205,13 +197,15 @@ export default function AddProduct() {
             </div>
 
             {/* Location Status */}
-            <div className="flex items-center gap-2 px-3 py-2 rounded-xl bg-white/3 border border-white/5 text-xs">
+            <div className={`flex items-center gap-2 px-3 py-2.5 rounded-xl border text-xs transition-colors ${
+              location ? "bg-green-500/5 border-green-500/15 text-green-400" : "bg-white/3 border-white/5 text-slate-500"
+            }`}>
               <span>{location ? "📍" : "⏳"}</span>
-              <span className="text-slate-500">
+              <span>
                 {location
-                  ? `Location: ${location.lat.toFixed(4)}, ${location.lng.toFixed(4)}`
+                  ? `Location detected: ${location.lat.toFixed(4)}, ${location.lng.toFixed(4)}`
                   : user?.location?.lat
-                  ? `Using saved location`
+                  ? "Using saved location"
                   : "Waiting for location…"}
               </span>
             </div>
@@ -222,9 +216,7 @@ export default function AddProduct() {
               className="btn-primary py-4 rounded-xl text-sm font-bold mt-2 disabled:opacity-60 disabled:cursor-not-allowed flex items-center justify-center gap-2"
             >
               {loading ? (
-                <>
-                  <Loader size="sm" /> Publishing…
-                </>
+                <><Loader size="sm" /> Publishing…</>
               ) : (
                 "📦 Publish Listing"
               )}
