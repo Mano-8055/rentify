@@ -27,6 +27,11 @@ pnpm-debug.log*
 .vscode/*
 !.vscode/extensions.json
 .idea
+.claude/
 
 # Misc
 *.local
+
+# 🔑 Credentials / sensitive files
+credential.png
+credentials.png
