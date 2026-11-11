@@ -1,0 +1,141 @@
+Peer-to-peer rental platform
+Rent Anything, Anywhere
+Connect with trusted neighbors to rent items within 10km. Save money, earn from idle items, and build community trust.
+Browse Nearby Items
+List Your Items
+Browse by Category
+Find exactly what you need
+Why Rentify
+Built for Trust
+Everything you need for a safe, seamless rental experience
+10km Radius Search
+Find items within 10km of your exact location using geolocation.
+Trust Score System
+Every user has a trust score updated after each rental interaction.
+Hourly & Daily Plans
+Flexible pricing — pay by the hour or by the day, your choice.
+Verified Users
+Government ID verification creates a safer rental community.
+List Anything
+Tools, cameras, bikes, furniture — list any idle item and earn.
+Full Rental Lifecycle
+Request → Accept → Return → Complete. Track every step.
+Simple Process
+How It Works
+Create Account
+Sign up and optionally verify with a government ID for higher trust.
+Find or List
+Browse items near you or list your own idle items with hourly/daily pricing.
+Rent & Earn
+Complete the rental, update your trust score, and build a reputation.
+Our Trust Score System
+Every user starts with 100 points. Points increase for on-time returns and decrease for late returns or damage. High-trust users get more rental approvals.
+Excellent
+Good
+Fair
+Risky
+Ready to Start?
+Join thousands of users already saving and earning on Rentify.
+Create Free Account
+Sign In
+Rent anything from neighbors
+Connect with trusted people within 10km. Save money, earn from idle items, and build community.
+10km Radius Search
+Find items near your exact location
+Trust Score System
+Verified users, safer rentals
+Earn & Save
+Rent idle items, save on purchases
+Welcome back
+Sign in to continue to Rentify
+Email Address
+you@example.com
+Password
+Sign In
+Signing in…
+Don't have an account? Create one free
+By signing in, you agree to our Terms and Privacy Policy
+Join thousands already renting
+Create your free account and start renting or listing items in your neighborhood today.
+List Anything
+Tools, cameras, bikes — earn from idle items
+Browse Nearby
+Rent items within 10km of your location
+Trusted Community
+Trust scores & ID verification for safety
+Start with 100 trust points
+Build your reputation with every rental
+Create account
+Join thousands renting and earning locally
+Full Name
+John Doe
+Email Address
+you@example.com
+Password
+Min. 6 characters
+Confirm Password
+Re-enter password
+Create Account
+Creating account…
+Already have an account? Sign in
+Loading product…
+Per Hour
+Per Day
+Trust: X/100 — Excellent/Good/Fair/Poor/Risky
+This item is currently rented out
+Request Rental
+Rental request sent! Waiting for owner approval.
+Failed to send rental request
+Hourly
+Daily
+Start
+End
+Estimated Total
+Send Rental Request
+Sending…
+Please sign in to rent
+This is your listing
+Home
+Nearby
+Dashboard
+List Item
+History
+Profile
+Sign In
+Get Started
+Logout
+Welcome, [name]
+Manage your listings and rental requests
++ List Item
+My Listings
+Pending Requests
+Active Rentals
+Trust Score
+Incoming Requests
+No pending requests
+Renter: [name] · Trust: X/100
+Accept
+Reject
+All Requests on My Items
+On-time
+Late
+Damage
+My Active Rentals
+Owner: [name] · ₹[amount]
+Mark Returned
+My Listings
+No products listed yet
+List Your First Item
+Available
+Rented
+Delete Listing
+Delete this product?
+All fields are required
+Passwords do not match
+Password must be at least 6 characters
+Registration failed. Please try again.
+Login failed. Please try again.
+Please fill in all fields
+Select both start and end dates
+End must be after start
+Failed to send rental request
