@@ -1,9 +1,11 @@
-import { useState, useEffect } from "react";
+/* eslint-disable react-hooks/set-state-in-effect */
+import { useState, useEffect, useRef } from "react";
 
 export default function useLocation() {
   const [location, setLocation] = useState(null);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
+  const mountedRef = useRef(false);
 
   const fetchLocation = () => {
     if (!navigator.geolocation) {
@@ -13,22 +15,28 @@ export default function useLocation() {
     setLoading(true);
     navigator.geolocation.getCurrentPosition(
       (pos) => {
-        setLocation({
-          lat: pos.coords.latitude,
-          lng: pos.coords.longitude,
-        });
-        setLoading(false);
+        if (mountedRef.current) {
+          setLocation({
+            lat: pos.coords.latitude,
+            lng: pos.coords.longitude,
+          });
+          setLoading(false);
+        }
       },
       (err) => {
-        setError(err.message);
-        setLoading(false);
+        if (mountedRef.current) {
+          setError(err.message);
+          setLoading(false);
+        }
       },
       { timeout: 10000, enableHighAccuracy: true }
     );
   };
 
   useEffect(() => {
+    mountedRef.current = true;
     fetchLocation();
+    return () => { mountedRef.current = false; };
   }, []);
 
   return { location, error, loading, refetch: fetchLocation };
